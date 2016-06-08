@@ -15,8 +15,8 @@ def category_detail(request, c_pk):
 
 def shop_detail(request, c_pk, s_pk):
 	category = Category.objects.get(pk=c_pk)
-	shop = Category.objects.get(pk=s_pk).filter(category=category)
-	review_list = Review.obejects.all().fileter(shop=shop)
+	shop = Shop.objects.get(pk=s_pk, category = category)
+	review_list = Review.objects.all().filter(shop=shop)
 	return render(request, 'blog/shop_detail.html', {'shop':shop, 'review_list':review_list})
 
 def category_new(request):
