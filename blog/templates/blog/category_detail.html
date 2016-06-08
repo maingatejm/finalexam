@@ -5,13 +5,17 @@
 
 {% for shop in shop_list %}
 
-	
+	<a href ="{% url "blog:shop_detail" category.pk shop.pk %}">
        {{shop.shop_name}}
+       </a>
        <br/>
        <img src = "{{shop.photo1.url}}">
        <br/>
     
 {% endfor %}
+
+
+<br/>
 
 <a href="{% url "blog:index" %}"> 홈으로 </a>
 
