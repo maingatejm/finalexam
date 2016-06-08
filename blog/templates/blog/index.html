@@ -25,7 +25,7 @@
 	<h3> Review list </h3>
 
 	{% for review in review_list %}
-		{{review.shop}} : {{review.comment}}
+		{{review.shop}} : {{review.comment}} ({{review.updated_at}})
 		<br/>
 	{% endfor %}
 
