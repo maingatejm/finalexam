@@ -47,7 +47,7 @@ def category_edit(request, c_pk):
 @login_required
 def review_new(request,c_pk, s_pk):
 	if request.method == "POST":
-		form = ReviewForm(request.POST)
+		form = ReviewForm(request.POST, request.FILES)
 		if form.is_valid():
 			review = form.save(commit=False)
 			review.shop = get_object_or_404(Shop, pk=s_pk)
@@ -63,7 +63,7 @@ def review_new(request,c_pk, s_pk):
 def review_edit(request, c_pk, s_pk, pk):
 	review = get_object_or_404(Review, pk = pk)
 	if request.method == 'POST':
-			form = ReviewForm(request.POST, instance=review)
+			form = ReviewForm(request.POST, request.FILES, instance=review)
 			if form.is_valid():
 				review = form.save(commit=False)
 				review.shop = get_object_or_404(Shop, pk=s_pk)

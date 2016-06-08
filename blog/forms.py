@@ -9,7 +9,8 @@ class CategoryForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
 	class Meta:
 		model = Review
-		fields = ['comment', 'photo']
+		fields =['comment', 'photo']
+
 
 class ShopForm(forms.ModelForm):
 	class Meta:
