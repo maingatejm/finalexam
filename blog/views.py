@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from .models import Category, Shop, Review
 from .forms import CategoryForm, ReviewForm
+from django.contrib.auth.decorators import login_required
 
 def index(request):
 	category_list = Category.objects.all()
@@ -19,6 +20,7 @@ def shop_detail(request, c_pk, s_pk):
 	review_list = Review.objects.all().filter(shop=shop)
 	return render(request, 'blog/shop_detail.html', {'shop':shop, 'review_list':review_list})
 
+@login_required
 def category_new(request):
 	if request.method == "POST":
 		form = CategoryForm(request.POST)
@@ -29,6 +31,7 @@ def category_new(request):
 		form = CategoryForm()
 	return render(request, 'blog/category_form.html', {'form':form,})
 
+@login_required
 def category_edit(request, c_pk):
 	category = get_object_or_404(Category, pk = c_pk)
 	if request.method == 'POST':
@@ -41,6 +44,7 @@ def category_edit(request, c_pk):
 			form = CategoryForm(instance=category)
 	return render(request,'blog/category_form.html', {'form':form,})
 
+@login_required
 def review_new(request,c_pk, s_pk):
 	if request.method == "POST":
 		form = ReviewForm(request.POST)
