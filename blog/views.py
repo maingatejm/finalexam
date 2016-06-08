@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from .models import Category, Shop, Review
-from .forms import CategoryForm, ReviewForm
+from .forms import CategoryForm, ReviewForm, ShopForm
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -75,3 +75,32 @@ def review_edit(request, c_pk, s_pk, pk):
 			form = ReviewForm(instance=review)
 	return render(request,'blog/review_form.html', {'form':form,})
 
+@login_required
+def shop_new(request,c_pk):
+	if request.method == "POST":
+		form = ShopForm(request.POST)
+		if form.is_valid():
+			shop = form.save(commit=False)
+			shop.category = get_object_or_404(Category, pk=c_pk)
+			shop.save()
+			
+			return redirect('blog:category_detail', c_pk)
+	else : 
+		form = ShopForm()
+	return render(request, 'blog/shop_form.html', {'form':form,})
+
+@login_required
+def shop_edit(request, c_pk, s_pk):
+	review = get_object_or_404(Review, pk = pk)
+	if request.method == 'POST':
+			form = ReviewForm(request.POST, instance=review)
+			if form.is_valid():
+				review = form.save(commit=False)
+				review.shop = get_object_or_404(Shop, pk=s_pk)
+				review.user = request.user
+				review.save()
+
+			return redirect('blog:shop_detail', c_pk, s_pk)
+	else:
+			form = ReviewForm(instance=review)
+	return render(request,'blog/review_form.html', {'form':form,})
