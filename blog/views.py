@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Category, Shop, Review
+from .forms import CategoryForm
 
 def index(request):
 	category_list = Category.objects.all()
@@ -13,6 +14,18 @@ def category_detail(request, c_pk):
 
 
 def shop_detail(request, c_pk, s_pk):
-	shop= Shop.obejects.get(pk=s_pk)
+	category = Category.objects.get(pk=c_pk)
+
+	shop= Shop.obejects.filter(category = category)
 	review_list = Review.obejects.all().fileter(shop=shop)
 	return render(request, 'blog/shop_detail.html', {'shop':shop, 'review_list':review_list})
+
+def category_new(request):
+	if request.method == "POST":
+		form = CategoryForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('blog:index')
+	else : 
+		form = CategoryForm()
+	return render(request, 'blog/category_form.html', {'form':form,})

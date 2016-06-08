@@ -20,7 +20,7 @@
 		</div>
 	</div>
 	{% endfor %}	
-
+<br/>
 	<h3> Review list </h3>
 
 	{% for review in review_list %}
@@ -32,5 +32,7 @@
 
 </div>
 
+
+<a href ="{% url "blog:category_new" %}" class = "btn btn-primary btn-block">카테고리 만들기</a>
 
 {% endblock %}
