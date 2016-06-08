@@ -19,6 +19,9 @@
 {% for review in shop.review_set.all %}
 <li>
 {{review.comment}} by {{review.user}} {{review.created_at}}
+{% if user == review.user %}
+<a href="{% url "blog:review_edit" shop.category.pk shop.pk review.pk %}"> 수정 </a>
+{% endif %}
 
 
 </li>
