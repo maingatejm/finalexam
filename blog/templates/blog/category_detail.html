@@ -1,0 +1,13 @@
+<h1> {{category.name}} </h1>
+
+{% for shop in shop_list %}
+
+	
+       {{shop.shop_name}}
+       <br/>
+       <img src = "{{shop.photo1.url}}">
+       <br/>
+    
+{% endfor %}
+
+<a href="{% url "blog:index" %}"> 홈으로 </a>
