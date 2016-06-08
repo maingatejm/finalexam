@@ -21,12 +21,14 @@ class Shop(models.Model):
 	photo3 = models.ImageField(null=True, blank=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
+	def __str__(self):
+		return self.shop_name
 
 class Review(models.Model):
 	shop = models.ForeignKey(Shop)
 	user = models.ForeignKey(settings.AUTH_USER_MODEL)
 	comment = models.TextField()
-	photo = models.ImageField(null=True)
+	photo = models.ImageField(null=True, blank = True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
