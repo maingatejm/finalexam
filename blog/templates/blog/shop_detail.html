@@ -13,6 +13,7 @@
 {{ shop.message|linebreaks}}
 
 <h3>Review list</h3>
+<a href ="{% url "blog:review_new" shop.category.pk shop.pk %}" class = "btn btn-primary btn-block">리뷰 쓰기</a>
 
 <ul>
 {% for review in shop.review_set.all %}
