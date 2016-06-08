@@ -10,4 +10,6 @@ class ShopAdmin(admin.ModelAdmin):
 class ReviewAdmin(admin.ModelAdmin):
 	list_display = ['shop', 'user', 'comment']
 
-admin.site.register(Category, CategoryAdmin, Shop, ShopAdmin, Review, ReviewAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Shop, ShopAdmin)
+admin.site.register(Review, ReviewAdmin)

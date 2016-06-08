@@ -1,0 +1,22 @@
+
+<div class="row">
+	{% for category in category_list %}
+	<div class="col-sm-4">
+		<div class="caption">
+			<a href="{% url "blog:category_detail" category.pk %}">
+				{{ category.name}}
+				</a>
+
+				{% for shop in category.shop_set.all %}
+				{{shop.shop_name}}
+				{% endfor %}
+
+
+
+			
+		</div>
+	</div>
+	{% endfor %}	
+</div>
+
+

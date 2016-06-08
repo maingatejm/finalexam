@@ -6,6 +6,9 @@ class Category(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
+	def __str__(self):
+		return self.name
+
 
 class Shop(models.Model):
 	category = models.ForeignKey(Category)
@@ -14,8 +17,8 @@ class Shop(models.Model):
 	address = models.TextField()
 	message = models.TextField()
 	photo1 = models.ImageField()
-	photo2 = models.ImageField(null=True)
-	photo3 = models.ImageField(null=True)
+	photo2 = models.ImageField(null=True, blank=True)
+	photo3 = models.ImageField(null=True, blank=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
