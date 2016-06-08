@@ -9,7 +9,13 @@
 <hr/>
 
 <img src = "{{ shop.photo1.url }}" />
+	{% if shop.photo2 %}
+	<img src = "{{ shop.photo2.url }}" />
+	{% endif %}
 
+	{% if shop.photo3 %}
+	<img src = "{{ shop.photo3.url }}" />
+	{% endif %}
 {{ shop.message|linebreaks}}
 
 <h3>Review list</h3>
