@@ -32,7 +32,10 @@
 <hr/>
 
 <a href ="{% url "blog:shop_edit" shop.category.pk shop.pk %}"> Shop 수정하기 </a>
+
 <br/>
 <a href ="{% url "blog:category_detail" shop.category.pk %}">카테고리로 이동</a>
+<br/>
+<a href="{% url "blog:index" %}"> 홈으로 </a>
 
 {% endblock %}
