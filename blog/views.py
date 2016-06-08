@@ -91,16 +91,15 @@ def shop_new(request,c_pk):
 
 @login_required
 def shop_edit(request, c_pk, s_pk):
-	review = get_object_or_404(Review, pk = pk)
+	shop = get_object_or_404(Shop, pk = s_pk)
 	if request.method == 'POST':
-			form = ReviewForm(request.POST, instance=review)
+			form = ShopForm(request.POST, instance=shop)
 			if form.is_valid():
-				review = form.save(commit=False)
-				review.shop = get_object_or_404(Shop, pk=s_pk)
-				review.user = request.user
-				review.save()
+				shop = form.save(commit=False)
+				shop.category = get_object_or_404(Category, pk=c_pk)
+				shop.save()
 
 			return redirect('blog:shop_detail', c_pk, s_pk)
 	else:
-			form = ReviewForm(instance=review)
-	return render(request,'blog/review_form.html', {'form':form,})
+			form = ShopForm(instance=shop)
+	return render(request,'blog/shop_form.html', {'form':form,})
