@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect,get_object_or_404
 from .models import Category, Shop, Review
 from .forms import CategoryForm, ReviewForm, ShopForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def index(request):
 	category_list = Category.objects.all()
@@ -26,6 +27,7 @@ def category_new(request):
 		form = CategoryForm(request.POST)
 		if form.is_valid():
 			form.save()
+			messages.success(request, '새 카테고리 등록')
 			return redirect('blog:index')
 	else : 
 		form = CategoryForm()
@@ -38,7 +40,7 @@ def category_edit(request, c_pk):
 			form = CategoryForm(request.POST, instance=category)
 			if form.is_valid():
 				form.save()
-
+				messages.success(request, '카테고리 이름 수정')
 			return redirect('blog:category_detail', c_pk)
 	else:
 			form = CategoryForm(instance=category)
@@ -53,7 +55,7 @@ def review_new(request,c_pk, s_pk):
 			review.shop = get_object_or_404(Shop, pk=s_pk)
 			review.user = request.user
 			review.save()
-			
+			messages.success(request, '리뷰가 등록되었습니다.')
 			return redirect('blog:shop_detail', c_pk, s_pk)
 	else : 
 		form = ReviewForm()
@@ -69,7 +71,7 @@ def review_edit(request, c_pk, s_pk, pk):
 				review.shop = get_object_or_404(Shop, pk=s_pk)
 				review.user = request.user
 				review.save()
-
+				messages.success(request, '리뷰가 수정되었습니다.')
 			return redirect('blog:shop_detail', c_pk, s_pk)
 	else:
 			form = ReviewForm(instance=review)
@@ -83,7 +85,7 @@ def shop_new(request,c_pk):
 			shop = form.save(commit=False)
 			shop.category = get_object_or_404(Category, pk=c_pk)
 			shop.save()
-			
+			messages.success(request, '새로운 샵이 등록되었습니다.')
 			return redirect('blog:category_detail', c_pk)
 	else : 
 		form = ShopForm()
@@ -98,7 +100,7 @@ def shop_edit(request, c_pk, s_pk):
 				shop = form.save(commit=False)
 				shop.category = get_object_or_404(Category, pk=c_pk)
 				shop.save()
-
+				messages.success(request, '샵 정보가 수정되었습니다.')
 			return redirect('blog:shop_detail', c_pk, s_pk)
 	else:
 			form = ShopForm(instance=shop)
