@@ -78,7 +78,7 @@ def review_edit(request, c_pk, s_pk, pk):
 @login_required
 def shop_new(request,c_pk):
 	if request.method == "POST":
-		form = ShopForm(request.POST)
+		form = ShopForm(request.POST, request.FILES)
 		if form.is_valid():
 			shop = form.save(commit=False)
 			shop.category = get_object_or_404(Category, pk=c_pk)
@@ -93,7 +93,7 @@ def shop_new(request,c_pk):
 def shop_edit(request, c_pk, s_pk):
 	shop = get_object_or_404(Shop, pk = s_pk)
 	if request.method == 'POST':
-			form = ShopForm(request.POST, instance=shop)
+			form = ShopForm(request.POST, request.FILES, instance=shop)
 			if form.is_valid():
 				shop = form.save(commit=False)
 				shop.category = get_object_or_404(Category, pk=c_pk)

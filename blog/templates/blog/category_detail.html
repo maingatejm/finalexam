@@ -20,6 +20,8 @@
 <a href ="{% url "blog:shop_new" category.pk %}"> Shop 등록하기 </a>
 <br/>
 
+<a href ="{% url "blog:category_edit" category.pk %}">카테고리 수정하기</a>
+<br/>
 <a href="{% url "blog:index" %}"> 홈으로 </a>
 
 {% endblock %}
